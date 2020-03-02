@@ -1,0 +1,24 @@
+body
+    font-family: Roboto
+    font-size: 30px
+
+$grid-col-gutter: 30px 
+$grid-side-padding: 20px 
+$grid-max-width: 500px
+
+.container
+    margin-left: auto
+    margin-right: auto
+    padding-left: $grid-side-padding
+    padding-right: $grid-side-padding
+    max-width: $grid-max-width
+
+.row
+    margin-left: -($grid-col-gutter/2)
+    margin-right: -($grid-col-gutter/2)
+
+.col
+    align-items: center
+    display: flex
+    padding-left: $grid-col-gutter/2
+    padding-right: $grid-col-gutter/2
