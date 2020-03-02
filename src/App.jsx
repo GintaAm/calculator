@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useState }  from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 
 function App() {
+
+  const [count, setCount] = useState(0);
+  
+  const handleClick = (value) => {
+  const newCount = count === 0 ? value : `${count} ${value}`; 
+  setCount(newCount)};
+
   return (
   <Container> 
     <Row> 
       <Col xs={4} className="bg-info text-white"> 
-        <div> 0</div>
+        <div> {count} </div>
       </Col> 
     </Row>
     <Row> 
-      <Col xs={3} className="bg-secondary"> <div> clear </div></Col>
+      <Col xs={3} className="bg-secondary"> <div onClick={() => setCount(0)}> clear </div></Col>
       <Col xs={1} className="bg-danger text-white"> <div> / </div></Col>
     </Row>
     <Row> 
