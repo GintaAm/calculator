@@ -1,47 +1,142 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import CustomCol from "./CustomColl";
 
-
-function App() {
-
+export default () => {
   const [count, setCount] = useState(0);
-  
-  const handleClick = (value) => {
-  const newCount = count === 0 ? value : `${count} ${value}`; 
-  setCount(newCount)};
+
+  const handleValueClick = value => {
+    if (value === "clear") {
+      setCount(0);
+      return;
+    }
+
+    if (count === 0) {
+      setCount(value);
+      return;
+    }
+
+    // should be moved to helper function
+    if (value === "=") {
+      console.log(Number(count));
+      console.log("====================================");
+      console.log(typeof count);
+      console.log("====================================");
+      return;
+    }
+
+    const numberValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    // can be moved to helper function, is space needed
+    const newValue =
+      numberValues.indexOf(value) === -1 ||
+      numberValues.indexOf(
+        count.charAt(count.length - 1) || count.toString()
+      ) === -1
+        ? ` ${value}`
+        : value;
+
+    const newCount = count === 0 ? value : `${count}${newValue}`;
+    setCount(newCount);
+  };
 
   return (
-  <Container> 
-    <Row> 
-      <Col xs={4} className="bg-info text-white"> 
-        <div> {count} </div>
-      </Col> 
-    </Row>
-    <Row> 
-      <Col xs={3} className="bg-secondary"> <div onClick={() => setCount(0)}> clear </div></Col>
-      <Col xs={1} className="bg-danger text-white"> <div> / </div></Col>
-    </Row>
-    <Row> 
-      <Col xs={1} className="bg-secondary"> <div> 7 </div></Col>
-      <Col xs={1} className="bg-secondary"> <div> 8 </div></Col>
-      <Col xs={1} className="bg-secondary"> <div> 9 </div></Col>
-      <Col xs={1} className="bg-danger text-white"> <div> - </div></Col>
-    </Row>
-    <Row> 
-      <Col xs={1} className="bg-secondary"> <div> 4 </div></Col>
-      <Col xs={1} className="bg-secondary"> <div> 5 </div></Col>
-      <Col xs={1} className="bg-secondary"> <div> 6 </div></Col>
-      <Col xs={1} className="bg-danger text-white"> <div> + </div></Col>
-    </Row>
-    <Row> 
-      <Col xs={1} className="bg-secondary"> <div> 1 </div></Col>
-      <Col xs={1} className="bg-secondary"> <div> 2 </div></Col>
-      <Col xs={1} className="bg-secondary"> <div> 3 </div></Col>
-      <Col xs={1} className="bg-danger text-white"> <div> = </div></Col>
-    </Row>
-  </Container>);
-}
-
-export default App;
+    <Container>
+      <Row>
+        <CustomCol size={4} classNameFull="bg-info text-white" value={count} />
+      </Row>
+      <Row>
+        <CustomCol
+          size={3}
+          classNameFull="bg-secondary"
+          value="clear"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-danger text-white"
+          value="/"
+          onValueClick={handleValueClick}
+        />
+      </Row>
+      <Row>
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="7"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="8"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="9"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-danger text-white"
+          value="-"
+          onValueClick={handleValueClick}
+        />
+      </Row>
+      <Row>
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="4"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="5"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="6"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-danger text-white"
+          value="+"
+          onValueClick={handleValueClick}
+        />
+      </Row>
+      <Row>
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="1"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="2"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-secondary"
+          value="3"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-danger text-white"
+          value="="
+          onValueClick={handleValueClick}
+        />
+      </Row>
+    </Container>
+  );
+};
