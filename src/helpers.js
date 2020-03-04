@@ -10,6 +10,7 @@ const doOperation = (countArray, operationIndex, operation) => {
     operation === "/" ? firstNumber / SecondNumber : firstNumber + SecondNumber;
   countArray.splice(operationIndex - 1, 3);
   countArray.push(newNumber);
+  return countArray;
 };
 
 const calculation = countArray => {
@@ -21,8 +22,12 @@ const calculation = countArray => {
   }
 
   const divisionIndex = countArray.indexOf("/");
+  const newCountArray =
+    divisionIndex > 0
+      ? doOperation(countArray, divisionIndex, "/")
+      : countArray;
 
-  return calculation(countArray);
+  return calculation(newCountArray);
   // Can be moved to separate function
 };
 
