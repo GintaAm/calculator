@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import CustomCol from "./CustomColl";
 import calculation from "./helpers";
+import ComponentA from "./KeybBoardHandler";
 
 export default () => {
   const [count, setCount] = useState(0);
@@ -145,6 +146,7 @@ export default () => {
           onValueClick={handleValueClick}
         />
       </Row>
+      <ComponentA />
     </Container>
   );
 };

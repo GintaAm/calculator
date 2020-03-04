@@ -15,9 +15,23 @@ describe("When App component is rendered and basic calcultions are done", () => 
     expect(container.length).toEqual(1);
   });
 
-  it("then there are four rows", () => {
-    expect(container.children().find("ForwardRef")).toEqual(4);
+  const rows = container.children().find("ForwardRef");
+
+  it("then there are 5 rows", () => {
+    expect(rows.length).toEqual(5);
   });
 
-  console.log(app.debug());
+  const col = rows.at(0).find("_default");
+
+  it("first row has 1 column", () => {
+    expect(col.length).toEqual(1);
+  });
+
+  /*  it("initial calculator value is 0", () => {
+    expect(col.text()).toEqual(0);
+  }); */
+
+  console.log(col.debug());
+  console.log(col.text());
+  // console.log(col.value());
 });
