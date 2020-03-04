@@ -3,38 +3,10 @@ import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import CustomCol from "./CustomColl";
-// import calculation from "./helpers";
+import calculation from "./helpers";
 
 export default () => {
   const [count, setCount] = useState(0);
-
-  const calculation = countArray => {
-    console.log(countArray);
-    if (countArray.length === 1) {
-      console.log(countArray[0]);
-
-      return countArray[0];
-    }
-
-    const divisionIndex = countArray.indexOf("/");
-    console.log(divisionIndex);
-    console.log(countArray[divisionIndex - 1]);
-    console.log(countArray[divisionIndex]);
-    console.log(countArray[divisionIndex + 1]);
-
-    const newNumber =
-      Number(countArray[divisionIndex - 1]) /
-      Number(countArray[divisionIndex + 1]);
-    console.log(newNumber);
-
-    countArray.splice(divisionIndex - 1, 3);
-    countArray.push(newNumber);
-    console.log(countArray);
-
-    calculation(countArray);
-
-    // Can be moved to separate function
-  };
 
   const handleValueClick = value => {
     if (value === "clear") {
@@ -50,8 +22,7 @@ export default () => {
     // should be moved to helper function
     if (value === "=") {
       const countArray = count.split(" ");
-      const newCount = 0;
-      console.log(calculation(countArray));
+      const newCount = calculation(countArray);
 
       setCount(newCount);
       return;
@@ -78,9 +49,15 @@ export default () => {
       </Row>
       <Row>
         <CustomCol
-          size={3}
+          size={2}
           classNameFull="bg-secondary"
           value="clear"
+          onValueClick={handleValueClick}
+        />
+        <CustomCol
+          size={1}
+          classNameFull="bg-danger text-white"
+          value="*"
           onValueClick={handleValueClick}
         />
         <CustomCol
